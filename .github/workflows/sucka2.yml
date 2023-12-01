@@ -57,7 +57,12 @@ jobs:
     - name: registerUser
       run: |
           echo "Register WebGoat User: testuser"
-          echo "..."
+          echo register = $(curl -s \
+            -H "Content-Type: application/json" \
+            -H "Accept: application/json" \
+            --request POST \
+            --data '{"username":"testuser","password":"abcd1234","matchingPassword":"abcd1234","agree":"agree"}' \
+            http://localhost:8080/WebGoat/register.mvc)
     - name: loginIncorrect
       run: |
           echo "Login with wrong password:"
